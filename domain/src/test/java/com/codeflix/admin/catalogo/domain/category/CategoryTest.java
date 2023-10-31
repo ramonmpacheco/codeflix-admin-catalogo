@@ -69,7 +69,7 @@ class CategoryTest {
     @Test
     public void givenAnInvalidNameLengthGreaterThan255_whenCallNewCategoryAndValidate_thenShouldReceiveError() {
         final String expectedName = """
-                Fala pro cliente que o deploy automatizado no Heroku causou o bug dos argumentos 
+                Fala pro cliente que o deploy automatizado no Heroku causou o bug dos argumentos
                 que definem um schema dinâmico. Com este commit, o gerenciador de dependências do frontend causou o 
                 bug do nosso servidor de DNS. Dado o fluxo de dados atual, o módulo de recursão paralela causou o 
                 bug da execução de requisições eficientes na API.
