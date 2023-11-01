@@ -6,7 +6,8 @@ import com.codeflix.admin.catalogo.domain.validation.Validator;
 
 public class CategoryValidator extends Validator {
     private final Category category;
-
+    private static final int NAME_MIN_LENGTH = 3;
+    private static final int MAX_MIN_LENGTH = 255;
     public CategoryValidator(final Category category, ValidationHandler handler) {
         super(handler);
         this.category = category;
@@ -28,7 +29,7 @@ public class CategoryValidator extends Validator {
             return;
         }
         final int length = name.trim().length();
-        if (length < 3 || length > 255) {
+        if (length < NAME_MIN_LENGTH || length > MAX_MIN_LENGTH) {
             this.validationHandler().append(new Error("'name' must be between 3 and 255 characters"));
         }
     }
