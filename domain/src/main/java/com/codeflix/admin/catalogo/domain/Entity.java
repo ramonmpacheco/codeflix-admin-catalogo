@@ -1,4 +1,4 @@
-package com.codeflix.admin.catalogo.domain.category;
+package com.codeflix.admin.catalogo.domain;
 
 import com.codeflix.admin.catalogo.domain.validation.ValidationHandler;
 

@@ -1,5 +1,6 @@
 package com.codeflix.admin.catalogo.domain.category;
 
+import com.codeflix.admin.catalogo.domain.AggregateRoot;
 import com.codeflix.admin.catalogo.domain.validation.ValidationHandler;
 
 import java.time.Instant;
@@ -76,7 +77,7 @@ public class Category extends AggregateRoot<CategoryId> {
         return description;
     }
 
-    public Boolean getActive() {
+    public Boolean isActive() {
         return active;
     }
 
@@ -90,5 +91,19 @@ public class Category extends AggregateRoot<CategoryId> {
 
     public Instant getDeletedAt() {
         return deletedAt;
+    }
+
+    public Category update(final String name,
+                           final String desc,
+                           final boolean active) {
+        if (active) {
+            activate();
+        } else {
+            deactivate();
+        }
+        this.name = name;
+        this.description = desc;
+        this.updatedAt = Instant.now();
+        return this;
     }
 }

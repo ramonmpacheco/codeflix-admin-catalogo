@@ -1,9 +1,11 @@
 package com.codeflix.admin.catalogo.domain.category;
 
+import com.codeflix.admin.catalogo.domain.Identifier;
+
 import java.util.Objects;
 import java.util.UUID;
 
-public class CategoryId extends Identifier{
+public class CategoryId extends Identifier {
 
     private final String value;
 
