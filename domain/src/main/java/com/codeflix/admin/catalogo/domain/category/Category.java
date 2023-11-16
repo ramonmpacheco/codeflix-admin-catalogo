@@ -4,8 +4,9 @@ import com.codeflix.admin.catalogo.domain.AggregateRoot;
 import com.codeflix.admin.catalogo.domain.validation.ValidationHandler;
 
 import java.time.Instant;
+import java.util.Objects;
 
-public class Category extends AggregateRoot<CategoryId> implements Cloneable{
+public class Category extends AggregateRoot<CategoryId> implements Cloneable {
     private String name;
     private String description;
     private Boolean active;
@@ -26,8 +27,8 @@ public class Category extends AggregateRoot<CategoryId> implements Cloneable{
         this.name = name;
         this.description = description;
         this.active = active;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = Objects.requireNonNull(createdAt, "'CreatedAt' should not be null");
+        this.updatedAt = Objects.requireNonNull(updatedAt, "'UpdatedAt' should not be null");
         this.deletedAt = deletedAt;
     }
 
@@ -44,10 +45,31 @@ public class Category extends AggregateRoot<CategoryId> implements Cloneable{
         );
     }
 
+    public static Category with(
+            CategoryId id,
+            String name,
+            String description,
+            boolean active,
+            Instant createdAt,
+            Instant updatedAt,
+            Instant deletedAt
+    ) {
+        return new Category(
+                id,
+                name,
+                description,
+                active,
+                createdAt,
+                updatedAt,
+                deletedAt
+        );
+    }
+
     @Override
     public void validate(final ValidationHandler handler) {
         new CategoryValidator(this, handler).validate();
     }
+
 
     public Category deactivate() {
         if (getDeletedAt() == null) {

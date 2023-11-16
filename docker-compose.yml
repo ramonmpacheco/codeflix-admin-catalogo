@@ -17,4 +17,4 @@ services:
 
 networks:
   adm_videos_network:
-    external: true
+#    external: true
