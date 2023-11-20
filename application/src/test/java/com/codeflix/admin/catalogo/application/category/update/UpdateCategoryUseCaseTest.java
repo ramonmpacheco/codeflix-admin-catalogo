@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateCategoryUseCaseTest {
+public class UpdateCategoryUseCaseTest {
 
     @InjectMocks
     private DefaultUpdateCategoryUseCase useCase;

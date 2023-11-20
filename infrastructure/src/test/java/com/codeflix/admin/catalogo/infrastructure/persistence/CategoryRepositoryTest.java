@@ -1,7 +1,7 @@
 package com.codeflix.admin.catalogo.infrastructure.persistence;
 
 import com.codeflix.admin.catalogo.domain.category.Category;
-import com.codeflix.admin.catalogo.infrastructure.MySqlGatewayTest;
+import com.codeflix.admin.catalogo.MySqlGatewayTest;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
 import org.hibernate.PropertyValueException;

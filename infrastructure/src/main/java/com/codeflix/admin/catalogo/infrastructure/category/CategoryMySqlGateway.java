@@ -7,9 +7,19 @@ import com.codeflix.admin.catalogo.domain.category.CategorySearchQuery;
 import com.codeflix.admin.catalogo.domain.pagination.Pagination;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
+import com.codeflix.admin.catalogo.infrastructure.utils.SpecificationUtils;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.Optional;
+
+import static com.codeflix.admin.catalogo.infrastructure.utils.SpecificationUtils.like;
 
 @Service
 public class CategoryMySqlGateway implements CategoryGateway {
@@ -27,9 +37,9 @@ public class CategoryMySqlGateway implements CategoryGateway {
     @Override
     public void deleteById(final CategoryId id) {
         final var idValue = id.getValue();
-       if( this.repository.existsById(idValue)) {
-           this.repository.deleteById(idValue);
-       }
+        if (this.repository.existsById(idValue)) {
+            this.repository.deleteById(idValue);
+        }
     }
 
     @Override
@@ -44,8 +54,32 @@ public class CategoryMySqlGateway implements CategoryGateway {
     }
 
     @Override
-    public Pagination<Category> findAll(CategorySearchQuery csq) {
-        return null;
+    public Pagination<Category> findAll(final CategorySearchQuery csq) {
+        // Paginação
+        final var page = PageRequest.of(
+                csq.page(),
+                csq.perPage(),
+                Sort.by(Sort.Direction.fromString(csq.direction()), csq.sort())
+        );
+
+        // Busca dinamica pelo criterio terms (name ou description)
+        final var specifications = Optional.ofNullable(csq.terms())
+                .filter(str -> !str.isBlank())
+                .map(str -> SpecificationUtils
+                        .<CategoryJpaEntity>like("name", str)
+                        .or(like("description", str))
+                )
+                .orElse(null);
+
+        final var pageResult =
+                this.repository.findAll(Specification.where(specifications), page);
+
+        return new Pagination<>(
+                pageResult.getNumber(),
+                pageResult.getSize(),
+                pageResult.getTotalElements(),
+                pageResult.map(CategoryJpaEntity::toAggregate).toList()
+        );
     }
 
     private Category save(final Category c) {
