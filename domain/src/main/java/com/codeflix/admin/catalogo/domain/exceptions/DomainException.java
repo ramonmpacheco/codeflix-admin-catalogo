@@ -7,7 +7,7 @@ import com.codeflix.admin.catalogo.domain.validation.Error;
 public class DomainException extends NoStacktraceException{
     private final List<Error> errs;
 
-    private DomainException(final String message, final List<Error> errs) {
+    protected DomainException(final String message, final List<Error> errs) {
         super(message);
         this.errs =  errs;
     }

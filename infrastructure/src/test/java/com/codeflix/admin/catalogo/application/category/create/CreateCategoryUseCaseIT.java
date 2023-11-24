@@ -9,14 +9,11 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @IntegrationTest
 public class CreateCategoryUseCaseIT {
@@ -44,7 +41,7 @@ public class CreateCategoryUseCaseIT {
         assertNotNull(out.id());
         Assertions.assertEquals(1, categoryRepository.count());
 
-       final var actualCategory = categoryRepository.findById(out.id().getValue()).get();
+       final var actualCategory = categoryRepository.findById(out.id()).get();
 
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDesc, actualCategory.getDescription());
@@ -92,7 +89,7 @@ public class CreateCategoryUseCaseIT {
         assertNotNull(out.id());
         Assertions.assertEquals(1, categoryRepository.count());
 
-        final var actualCategory = categoryRepository.findById(out.id().getValue()).get();
+        final var actualCategory = categoryRepository.findById(out.id()).get();
 
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDesc, actualCategory.getDescription());
