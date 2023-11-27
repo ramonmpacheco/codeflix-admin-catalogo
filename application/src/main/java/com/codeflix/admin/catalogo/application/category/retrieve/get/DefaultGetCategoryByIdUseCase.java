@@ -26,7 +26,7 @@ public class DefaultGetCategoryByIdUseCase extends GetCategoryByIdUseCase {
                 .orElseThrow(notFound(categoryId));
     }
 
-    private Supplier<DomainException> notFound(final CategoryId id) {
+    private Supplier<NotFoundException> notFound(final CategoryId id) {
         return () -> NotFoundException.with(Category.class, id);
     }
 }

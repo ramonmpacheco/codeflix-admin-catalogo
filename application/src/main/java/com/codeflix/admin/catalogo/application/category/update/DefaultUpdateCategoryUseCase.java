@@ -4,12 +4,14 @@ import com.codeflix.admin.catalogo.domain.category.Category;
 import com.codeflix.admin.catalogo.domain.category.CategoryGateway;
 import com.codeflix.admin.catalogo.domain.category.CategoryId;
 import com.codeflix.admin.catalogo.domain.exceptions.DomainException;
+import com.codeflix.admin.catalogo.domain.exceptions.NotFoundException;
 import com.codeflix.admin.catalogo.domain.validation.Error;
 import com.codeflix.admin.catalogo.domain.validation.handler.Notification;
 import io.vavr.API;
 import io.vavr.control.Either;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import static io.vavr.API.Left;
 import static io.vavr.API.Try;
@@ -24,11 +26,12 @@ public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase {
 
     @Override
     public Either<Notification, UpdateCategoryOutput> execute(final UpdateCategoryCommand command) {
-        final var category = this.gateway.findById(CategoryId.from(command.id()))
-                .orElseThrow(() -> DomainException.with(
-                        new Error("Category with Id %s was not-found".formatted(command.id()))
-                ));
+        final var id = CategoryId.from(command.id());
+        final var category = this.gateway.findById(id)
+                .orElseThrow(notFound(id));
+
         final var notification = Notification.create();
+
         category.update(command.name(), command.description(), command.isActive())
                 .validate(notification);
 
@@ -39,5 +42,9 @@ public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase {
         return Try(() -> this.gateway.update(category))
                 .toEither()
                 .bimap(Notification::create, UpdateCategoryOutput::from);
+    }
+
+    private Supplier<DomainException> notFound(final CategoryId id) {
+        return () -> NotFoundException.with(Category.class, id);
     }
 }

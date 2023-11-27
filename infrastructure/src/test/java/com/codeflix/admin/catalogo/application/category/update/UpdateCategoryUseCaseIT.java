@@ -3,26 +3,23 @@ package com.codeflix.admin.catalogo.application.category.update;
 import com.codeflix.admin.catalogo.IntegrationTest;
 import com.codeflix.admin.catalogo.domain.category.Category;
 import com.codeflix.admin.catalogo.domain.category.CategoryGateway;
-import com.codeflix.admin.catalogo.domain.category.CategoryId;
 import com.codeflix.admin.catalogo.domain.exceptions.DomainException;
+import com.codeflix.admin.catalogo.domain.exceptions.NotFoundException;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @IntegrationTest
 public class UpdateCategoryUseCaseIT {
@@ -164,8 +161,7 @@ public class UpdateCategoryUseCaseIT {
         final var expectedName = "Filmes";
         final var expectedDesc = "A categoria mais assistida";
         final var expectedIsActive = false;
-        final var expectedErrMessage = "Category with Id 123 was not-found";
-        final var expectedErrorCount = 1;
+        final var expectedErrMessage = "Category with ID 123 was not found";
 
         final var expectedId = "123";
         final var command = UpdateCategoryCommand.with(
@@ -175,11 +171,9 @@ public class UpdateCategoryUseCaseIT {
                 expectedIsActive
         );
 
-        final var actualException = Assertions.assertThrows(DomainException.class, ()-> useCase.execute(command));
+        final var actualException = Assertions.assertThrows(NotFoundException.class, ()-> useCase.execute(command));
 
-        assertEquals(expectedErrorCount, actualException.getErrors().size());
-        assertEquals(expectedErrMessage, actualException.getErrors().get(0).message());
-
+        assertEquals(expectedErrMessage, actualException.getMessage());
     }
 
     private void save(final Category... categoryList) {

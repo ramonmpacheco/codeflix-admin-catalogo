@@ -19,7 +19,7 @@ import java.lang.annotation.*;
         }
 )
 @DataJpaTest
-@ExtendWith(CleanUpExtension.class)
+@ExtendWith(MySqlCleanUpExtension.class)
 public @interface MySqlGatewayTest {
 
 }
