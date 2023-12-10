@@ -14,6 +14,7 @@ import java.lang.annotation.*;
 @Inherited
 @ActiveProfiles("test-integration")
 @ComponentScan(
+        basePackages = "com.codeflix.admin.catalogo",
         includeFilters = {
                 @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".[MySQLGateway]")
         }
