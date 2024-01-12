@@ -1,5 +1,7 @@
 package com.codeflix.admin.catalogo.domain.video;
 
+import com.codeflix.admin.catalogo.domain.pagination.Pagination;
+
 import java.util.Optional;
 
 public interface VideoGateway {
