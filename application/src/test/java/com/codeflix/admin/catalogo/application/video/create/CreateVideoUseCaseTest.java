@@ -1,15 +1,16 @@
 package com.codeflix.admin.catalogo.application.video.create;
 
 import com.codeflix.admin.catalogo.application.UseCaseTest;
+import com.codeflix.admin.catalogo.domain.Fixture;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberGateway;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberId;
 import com.codeflix.admin.catalogo.domain.category.CategoryGateway;
 import com.codeflix.admin.catalogo.domain.category.CategoryId;
+import com.codeflix.admin.catalogo.domain.exceptions.InternalErrorException;
 import com.codeflix.admin.catalogo.domain.exceptions.NotificationException;
 import com.codeflix.admin.catalogo.domain.genre.GenreGateway;
 import com.codeflix.admin.catalogo.domain.genre.GenreId;
-import com.codeflix.admin.catalogo.domain.video.Resource;
-import com.codeflix.admin.catalogo.domain.video.VideoMediaType;
+import com.codeflix.admin.catalogo.domain.video.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

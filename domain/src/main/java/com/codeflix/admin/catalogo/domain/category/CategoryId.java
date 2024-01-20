@@ -1,31 +1,26 @@
 package com.codeflix.admin.catalogo.domain.category;
 
 import com.codeflix.admin.catalogo.domain.Identifier;
+import com.codeflix.admin.catalogo.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class CategoryId extends Identifier {
-
     private final String value;
 
-    private CategoryId(String value) {
-        Objects.requireNonNull(value);
-        this.value = value;
+    private CategoryId(final String value) {
+        this.value = Objects.requireNonNull(value);
     }
 
     public static CategoryId unique() {
-        return from(UUID.randomUUID());
+        return CategoryId.from(IdUtils.uuid());
     }
 
-    public static CategoryId from(final String id) {
-        return new CategoryId(id);
+    public static CategoryId from(final String anId) {
+        return new CategoryId(anId);
     }
 
-    public static CategoryId from(final UUID id) {
-        return new CategoryId(id.toString().toLowerCase());
-    }
-
+    @Override
     public String getValue() {
         return value;
     }
@@ -35,7 +30,7 @@ public class CategoryId extends Identifier {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final CategoryId that = (CategoryId) o;
-        return Objects.equals(getValue(), that.getValue());
+        return getValue().equals(that.getValue());
     }
 
     @Override

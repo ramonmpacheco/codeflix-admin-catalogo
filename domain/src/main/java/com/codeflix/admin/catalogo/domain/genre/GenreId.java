@@ -1,9 +1,9 @@
 package com.codeflix.admin.catalogo.domain.genre;
 
 import com.codeflix.admin.catalogo.domain.Identifier;
+import com.codeflix.admin.catalogo.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class GenreId extends Identifier {
     private final String value;
@@ -14,15 +14,11 @@ public class GenreId extends Identifier {
     }
 
     public static GenreId unique() {
-        return GenreId.from(UUID.randomUUID());
+        return GenreId.from(IdUtils.uuid());
     }
 
     public static GenreId from(final String anId) {
         return new GenreId(anId);
-    }
-
-    public static GenreId from(final UUID anId) {
-        return new GenreId(anId.toString().toLowerCase());
     }
 
     @Override
