@@ -3,6 +3,7 @@ package com.codeflix.admin.catalogo.domain.video;
 import com.codeflix.admin.catalogo.domain.AggregateRoot;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberId;
 import com.codeflix.admin.catalogo.domain.category.CategoryId;
+import com.codeflix.admin.catalogo.domain.events.DomainEvent;
 import com.codeflix.admin.catalogo.domain.genre.GenreId;
 import com.codeflix.admin.catalogo.domain.utils.InstantUtils;
 import com.codeflix.admin.catalogo.domain.validation.ValidationHandler;

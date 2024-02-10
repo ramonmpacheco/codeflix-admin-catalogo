@@ -4,6 +4,7 @@ import com.codeflix.admin.catalogo.domain.UnitTest;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberId;
 import com.codeflix.admin.catalogo.domain.category.CategoryId;
 import com.codeflix.admin.catalogo.domain.genre.GenreId;
+import com.codeflix.admin.catalogo.domain.utils.InstantUtils;
 import com.codeflix.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -496,7 +497,7 @@ public class VideoTest extends UnitTest {
 
         // when
         final var actualVideo = Video.with(
-                VideoID.unique(),
+                VideoId.unique(),
                 expectedTitle,
                 expectedDescription,
                 expectedLaunchedAt,

@@ -7,6 +7,7 @@ import com.codeflix.admin.catalogo.domain.pagination.Pagination;
 import com.codeflix.admin.catalogo.domain.pagination.SearchQuery;
 import com.codeflix.admin.catalogo.infrastructure.castmember.persistence.CastMemberJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.castmember.persistence.CastMemberRepository;
+import com.codeflix.admin.catalogo.infrastructure.utils.SpecificationUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
