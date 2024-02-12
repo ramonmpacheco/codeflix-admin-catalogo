@@ -70,6 +70,10 @@ server:
         multipart:
           max-file-size: 10GB # Max file size.
           max-request-size: 100GB # Max request size.
+    servlet:
+      multipart:
+        max-file-size: 10GB # Max file size.
+        max-request-size: 100GB # Max request size.
 
     storage:
       catalogo-videos:
