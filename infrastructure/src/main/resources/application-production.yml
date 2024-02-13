@@ -5,7 +5,7 @@ amqp:
   password: ${AMQP_RABBIT_PASSWORD}
 
 keycloak:
-  realm: ${KEYCLOAK_REALM:fc3-codeflix}
+  realm: ${KEYCLOAK_REALM:codeflix}
   host: ${KEYCLOAK_HOST:http://localhost:8443}
 
 mysql:
