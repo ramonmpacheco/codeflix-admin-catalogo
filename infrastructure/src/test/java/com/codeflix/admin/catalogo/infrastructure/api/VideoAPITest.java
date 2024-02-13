@@ -22,6 +22,7 @@ import com.codeflix.admin.catalogo.application.video.update.UpdateVideoUseCase;
 import com.codeflix.admin.catalogo.domain.Fixture;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberId;
 import com.codeflix.admin.catalogo.domain.category.CategoryId;
+import com.codeflix.admin.catalogo.domain.validation.Error;
 import com.codeflix.admin.catalogo.domain.exceptions.NotFoundException;
 import com.codeflix.admin.catalogo.domain.exceptions.NotificationException;
 import com.codeflix.admin.catalogo.domain.genre.GenreId;
